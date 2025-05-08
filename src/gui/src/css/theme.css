@@ -23,3 +23,316 @@
 hue = 320; ss.addRule('.taskbar, .window-head, .window-sidebar', `background-color: hsl(${hue}, 65.1%, 70.78%)`)
 
 */
+
+/* ======================== */
+/* THEME VARIABLES OVERRIDE */
+/* ======================== */
+:root {
+    /* Light theme */
+    --primary-bg-light: #f5f5f5;
+    --secondary-bg-light: #ffffff;
+    --surface-bg-light: #f0f0f0;
+    --text-primary-light: #333333;
+    --text-secondary-light: rgba(0, 0, 0, 0.7);
+    --accent-color-light: #1971c2;
+    --hover-bg-light: rgba(0, 0, 0, 0.05);
+    --active-bg-light: rgba(0, 0, 0, 0.1);
+    --border-color-light: rgba(0, 0, 0, 0.1);
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+    /* Dark theme */
+    --primary-bg-dark: #121212;
+    --secondary-bg-dark: #1e1e1e;
+    --surface-bg-dark: #252525;
+    --text-primary-dark: #ffffff;
+    --text-secondary-dark: rgba(255, 255, 255, 0.7);
+    --accent-color-dark: #4dabf7;
+    --hover-bg-dark: rgba(255, 255, 255, 0.1);
+    --active-bg-dark: rgba(255, 255, 255, 0.2);
+    --border-color-dark: rgba(255, 255, 255, 0.1);
+    --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+    /* Current theme defaults */
+    --primary-bg: var(--primary-bg-dark);
+    --secondary-bg: var(--secondary-bg-dark);
+    --surface-bg: var(--surface-bg-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --accent-color: var(--accent-color-dark);
+    --hover-bg: var(--hover-bg-dark);
+    --active-bg: var(--active-bg-dark);
+    --border-color: var(--border-color-dark);
+    --shadow: var(--shadow-dark);
+  }
+  
+  body.light-theme {
+    --primary-bg: var(--primary-bg-light);
+    --secondary-bg: var(--secondary-bg-light);
+    --surface-bg: var(--surface-bg-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --accent-color: var(--accent-color-light);
+    --hover-bg: var(--hover-bg-light);
+    --active-bg: var(--active-bg-light);
+    --border-color: var(--border-color-light);
+    --shadow: var(--shadow-light);
+  }
+  
+  /* ===================== */
+  /* GLOBAL STYLE OVERRIDE */
+  /* ===================== */
+  body {
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* ===================== */
+  /* WINDOW STYLE OVERRIDE */
+  /* ===================== */
+  .window {
+    background-color: var(--surface-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  
+  .window-head {
+    background-color: var(--secondary-bg) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 14px 16px !important;
+    filter: none !important;
+  }
+  
+  .window-head-title {
+    color: var(--text-primary) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    margin-left: 0 !important;
+  }
+  
+  .window-action-btn > img {
+    filter: invert(1) opacity(0.7) !important;
+  }
+  
+  .window-action-btn:hover > img {
+    opacity: 1 !important;
+  }
+  
+  .window-body {
+    background-color: var(--surface-bg) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .window-sidebar {
+    background-color: var(--secondary-bg) !important;
+    border-right: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .window-sidebar-item {
+    color: var(--text-secondary) !important;
+  }
+  
+  .window-sidebar-item:hover, 
+  .window-sidebar-item.has-open-contextmenu {
+    background-color: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .window-sidebar-item-active {
+    background-color: var(--active-bg) !important;
+    color: var(--accent-color) !important;
+  }
+  
+  /* ======================= */
+  /* CONTEXT MENU OVERRIDES */
+  /* ======================= */
+  .context-menu {
+    background-color: var(--secondary-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    color: var(--text-primary) !important;
+    border-radius: 10px !important;
+    padding: 8px !important;
+  }
+  
+  .context-menu .context-menu-item:not(.context-menu-divider) {
+    color: var(--text-primary) !important;
+    border-radius: 6px !important;
+  }
+  
+  .context-menu .context-menu-item:hover {
+    background-color: var(--hover-bg) !important;
+  }
+  
+  .context-menu .context-menu-item-active {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+  }
+  
+  /* ===================== */
+  /* BUTTON STYLE OVERRIDE */
+  /* ===================== */
+  .button {
+    border-radius: 8px !important;
+    background: var(--accent-color) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  .button:hover {
+    background: var(--accent-color) !important;
+    opacity: 0.9 !important;
+    transform: translateY(-1px) !important;
+  }
+  
+  .button:active {
+    transform: translateY(0) !important;
+  }
+  
+  /* ====================== */
+  /* INPUT FIELD OVERRIDES */
+  /* ====================== */
+  input[type=text], 
+  input[type=password], 
+  input[type=email], 
+  select {
+    background-color: var(--secondary-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  input[type=text]:focus, 
+  input[type=password]:focus, 
+  input[type=email]:focus, 
+  select:focus {
+    border: 1px solid var(--accent-color) !important;
+    box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.3) !important;
+  }
+  
+  /* ======================= */
+  /* TASK MANAGER OVERRIDES */
+  /* ======================= */
+  .window-task-manager .window-body {
+    background-color: var(--secondary-bg) !important;
+  }
+  
+  /* ===================== */
+  /* FILE DIALOG OVERRIDES */
+  /* ===================== */
+  .window-filedialog .window-body {
+    background-color: var(--surface-bg) !important;
+  }
+  
+  /* ===================== */
+  /* THEME TOGGLE BUTTON */
+  /* ===================== */
+  .theme-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: var(--secondary-bg);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+  }
+  
+  .theme-toggle:hover {
+    background-color: var(--hover-bg);
+    transform: translateY(-2px);
+  }
+  
+  .theme-toggle:active {
+    transform: translateY(0);
+  }
+  
+  /* ===================== */
+  /* WINDOW CONTROLS */
+  /* ===================== */
+  .window-controls {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .window-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .window-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  .window-btn.close {
+    background-color: #ff5f56;
+  }
+  
+  .window-btn.minimize {
+    background-color: #ffbd2e;
+  }
+  
+  .window-btn.maximize {
+    background-color: #27c93f;
+  }
+  
+  /* ===================== */
+  /* ANIMATIONS */
+  /* ===================== */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .animate-fade {
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  .animate-slide {
+    animation: slideUp 0.3s ease forwards;
+  }
+  
+  /* ===================== */
+  /* RESPONSIVE ADJUSTMENTS */
+  /* ===================== */
+  @media (max-width: 768px) {
+    .window {
+      border-radius: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      top: 0 !important;
+      left: 0 !important;
+    }
+    
+    .window-head {
+      padding: 12px 16px !important;
+    }
+    
+    .window-controls .window-btn {
+      width: 10px;
+      height: 10px;
+    }
+  }
