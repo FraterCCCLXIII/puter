@@ -43,6 +43,7 @@ import UIWindowWelcome from "./UIWindowWelcome.js"
 import launch_app from "../helpers/launch_app.js"
 import item_icon from "../helpers/item_icon.js"
 import UIWindowSearch from "./UIWindowSearch.js"
+import UITopNav from "./UITopNav.js"
 
 async function UIDesktop(options) {
     let h = '';
@@ -761,12 +762,13 @@ async function UIDesktop(options) {
     // Append to <body>
     $('body').append(h);
 
-    // Set desktop height based on taskbar height
-    $('.desktop').css('height', `calc(100vh - ${window.taskbar_height + window.toolbar_height}px)`)
+    // Set desktop height based on taskbar height and top navigation
+    $('.desktop').css('height', `calc(100vh - ${window.taskbar_height + window.toolbar_height + 38}px)`)
 
     // ---------------------------------------------------------------
-    // Taskbar
+    // Navigation and Taskbar
     // ---------------------------------------------------------------
+    UITopNav();
     UITaskbar();
     UIDock();
 
@@ -1943,8 +1945,8 @@ window.exit_fullpage_mode = (el_window) => {
         $(el_window).find('.window-head').show();
     }
 
-    // reset dektop height to take into account the taskbar height
-    $('.desktop').css('height', `calc(100vh - ${window.taskbar_height + window.toolbar_height}px)`);
+    // reset dektop height to take into account the taskbar height and top navigation
+    $('.desktop').css('height', `calc(100vh - ${window.taskbar_height + window.toolbar_height + 38}px)`);
 
     // hide the 'Show Desktop' button in toolbar
     $('.show-desktop-btn').hide();

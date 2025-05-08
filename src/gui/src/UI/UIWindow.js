@@ -242,6 +242,16 @@ async function UIWindow(options) {
         // Head
         if(options.has_head){
             h += `<div class="window-head">`;
+                // macOS style window controls on the left
+                // Close button
+                h += `<span class="window-action-btn window-close-btn"></span>`;
+                // Minimize button, only if window is resizable and not embedded
+                if(options.is_resizable && options.show_minimize_button && !window.is_embedded)
+                    h += `<span class="window-action-btn window-minimize-btn"></span>`;
+                // Maximize button
+                if(options.is_resizable && options.show_maximize_button)
+                    h += `<span class="window-action-btn window-scale-btn"></span>`;
+                
                 // draggable handle which also contains icon and title
                 h+=`<div class="window-head-draggable">`;
                     // icon
@@ -250,14 +260,6 @@ async function UIWindow(options) {
                     // title
                     h += `<span class="window-head-title" title="${html_encode(options.title)}"></span>`;
                 h += `</div>`;
-                // Minimize button, only if window is resizable and not embedded
-                if(options.is_resizable && options.show_minimize_button && !window.is_embedded)
-                    h += `<span class="window-action-btn window-minimize-btn" style="margin-left:0;"><img src="${html_encode(window.icons['minimize.svg'])}" draggable="false"></span>`;
-                // Maximize button
-                if(options.is_resizable && options.show_maximize_button)
-                    h += `<span class="window-action-btn window-scale-btn"><img src="${html_encode(window.icons['scale.svg'])}" draggable="false"></span>`;
-                // Close button
-                h += `<span class="window-action-btn window-close-btn"><img src="${html_encode(window.icons['close.svg'])}" draggable="false"></span>`;
             h += `</div>`;
         }
 

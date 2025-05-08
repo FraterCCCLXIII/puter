@@ -125,8 +125,15 @@ body {
     background: no-repeat center center fixed;
     background-position: center;
     background-size: cover;
-    background-color: #3d4c74;
+    background-color: var(--primary-bg);
+    background-image: url('../assets/img/wallpapers/default.jpg');
     overflow: hidden;
+    font-family: var(--font-family);
+}
+
+body.no-background {
+    background-image: none;
+    background-color: var(--solid-bg);
 }
 
 .embedded-in-3rd-party-website, .embedded-in-popup {
@@ -340,12 +347,13 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, sel
 .desktop {
     display: none;
     overflow: hidden;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 60px - 38px); /* Subtract taskbar and top nav heights */
     width: 100%;
     display: grid;
     grid-template-rows: repeat(auto-fill, 109px);
     grid-auto-flow: column;
     grid-template-columns: repeat(auto-fill, 120px);
+    margin-top: 38px; /* Account for top navigation */
 }
 
 .fullpage-mode .window-minimize-btn {

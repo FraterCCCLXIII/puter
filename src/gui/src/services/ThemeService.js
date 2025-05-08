@@ -46,6 +46,7 @@ export class ThemeService extends Service {
             alpha: 0.8,
             light_text: false,
             theme_mode: 'dark',
+            show_background: true,
         };
         this.root = document.querySelector(':root');
         
@@ -105,6 +106,12 @@ export class ThemeService extends Service {
                 this.toggleTheme(!e.matches);
             }
         });
+        
+        // Load background preference
+        const showBackground = localStorage.getItem('show_background');
+        if (showBackground !== null) {
+            this.toggleBackground(showBackground === 'true');
+        }
     }
 
     reset () {
@@ -165,6 +172,30 @@ export class ThemeService extends Service {
         // Broadcast theme change
         this.#broadcastService.sendBroadcast('themeToggled', {
             isLight: theme === 'light'
+        }, { sendToNewAppInstances: true });
+        
+        this.save_();
+    }
+    
+    /**
+     * Toggle background image visibility
+     * @param {boolean} show - Whether to show the background image
+     */
+    toggleBackground(show) {
+        this.state.show_background = show;
+        
+        if (show) {
+            document.body.classList.remove('no-background');
+        } else {
+            document.body.classList.add('no-background');
+        }
+        
+        // Save the preference
+        localStorage.setItem('show_background', show ? 'true' : 'false');
+        
+        // Broadcast background change
+        this.#broadcastService.sendBroadcast('backgroundToggled', {
+            showBackground: show
         }, { sendToNewAppInstances: true });
         
         this.save_();
