@@ -4764,3 +4764,225 @@ fieldset[name=number-code] {
     text-overflow: ellipsis; 
     white-space: nowrap;
 }
+
+/* Override the taskbar to match the dock style from Sample 2 */
+.taskbar {
+    background-color: rgba(37, 37, 37, 0.9) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 20px !important;
+    padding: 12px 20px !important;
+    height: auto !important;
+    width: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    bottom: 24px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    border: none !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 16px !important;
+}
+
+.taskbar .taskbar-item {
+    width: 60px !important;
+    height: 60px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 14px !important;
+    transition: all 0.2s !important;
+}
+
+.taskbar .taskbar-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-6px) scale(1.1) !important;
+}
+
+.taskbar .taskbar-item.active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.taskbar .taskbar-item::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #4dabf7;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.taskbar .taskbar-item.active::after {
+    opacity: 1;
+}
+
+.taskbar .taskbar-icon img {
+    width: 26px !important;
+    height: 26px !important;
+    padding: 0 !important;
+    filter: none !important;
+}
+
+/* Override the system bar to match the top bar from Sample 2 */
+.window-head {
+    background-color: #1e1e1e !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 2px 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    filter: none !important;
+    box-shadow: none !important;
+}
+
+.window-head-title {
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    margin-left: 0 !important;
+}
+
+.window-head-icon {
+    display: none !important;
+}
+
+.window-action-btn {
+    margin: 0 !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    opacity: 1 !important;
+    transition: all 0.2s !important;
+}
+
+.window-action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.window-action-btn>img {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 !important;
+    opacity: 0.7 !important;
+    filter: invert(1) !important;
+}
+
+.window-action-btn:hover>img {
+    opacity: 1 !important;
+}
+
+/* Override window styling */
+.window {
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    border: none !important;
+}
+
+.window-body {
+    background-color: #252525 !important;
+    color: white !important;
+}
+
+/* Override buttons to match modern style */
+.button {
+    border-radius: 8px !important;
+    background: #4dabf7 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: all 0.2s !important;
+}
+
+.button:hover {
+    background: #1971c2 !important;
+    transform: translateY(-1px);
+}
+
+.button-primary {
+    background: #4dabf7 !important;
+}
+
+.button-primary:hover {
+    background: #1971c2 !important;
+}
+
+/* Override context menu */
+.context-menu {
+    background-color: #252525 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+
+.context-menu .context-menu-item:not(.context-menu-divider) {
+    color: white !important;
+}
+
+.context-menu .context-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Override input fields */
+input[type=text], input[type=password], input[type=email], select {
+    background-color: #1e1e1e !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, select:focus {
+    border: 1px solid #4dabf7 !important;
+    box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.2) !important;
+}
+
+/* Add notification badges */
+.notification-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ff3b30;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .taskbar {
+        bottom: 12px !important;
+        padding: 10px 12px !important;
+        border-radius: 16px !important;
+        max-width: calc(100% - 24px);
+    }
+    
+    .taskbar .taskbar-item {
+        width: 48px !important;
+        height: 48px !important;
+    }
+    
+    .taskbar .taskbar-icon img {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    
+    .window-head {        
+    }
+    
+    .window-action-btn {
+        padding: 8px !important;
+    }
+    
+    .window-action-btn>img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+}
