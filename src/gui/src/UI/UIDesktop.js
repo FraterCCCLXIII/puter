@@ -31,6 +31,7 @@ import UIWindowLogin from "./UIWindowLogin.js"
 import UIWindowQR from "./UIWindowQR.js"
 import UIWindowRefer from "./UIWindowRefer.js"
 import UITaskbar from "./UITaskbar.js"
+import UIDock from "./UIDock.js"
 import new_context_menu_item from "../helpers/new_context_menu_item.js"
 import refresh_item_container from "../helpers/refresh_item_container.js"
 import changeLanguage from "../i18n/i18nChangeLanguage.js"
@@ -767,6 +768,7 @@ async function UIDesktop(options) {
     // Taskbar
     // ---------------------------------------------------------------
     UITaskbar();
+    UIDock();
 
     const el_desktop = document.querySelector('.desktop');
 

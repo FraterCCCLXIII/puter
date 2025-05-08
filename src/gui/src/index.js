@@ -92,6 +92,15 @@ window.gui = async (options) => {
         await window.loadCSS('/dist/bundle.min.css');
     }
 
+    // Load Inter font
+    await window.loadCSS('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+    
+    // Load Iconoir CSS
+    await window.loadCSS('https://cdn.jsdelivr.net/npm/iconoir@6.11.0/css/iconoir.min.css');
+    
+    // Set modern theme as default
+    document.documentElement.setAttribute('data-theme', 'modern');
+    
     // 🚀 Launch the GUI 🚀
     window.initgui(options);
 }

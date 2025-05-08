@@ -48,6 +48,7 @@ import { AntiCSRFService } from './services/AntiCSRFService.js';
 import { IPCService } from './services/IPCService.js';
 import { ExecService } from './services/ExecService.js';
 import { DebugService } from './services/DebugService.js';
+import UIDock from './UI/UIDock.js';
 import { privacy_aware_path } from './util/desktop.js';
 import { initIconReplacer } from './utils/icon-replacer.js';
 
@@ -195,6 +196,9 @@ window.initgui = async function(options){
     // Appends a viewport meta tag to the head of the document, ensuring optimal display on mobile devices.
     // This tag sets the width of the viewport to the device width, and locks the zoom level to 1 (prevents user scaling).
     $('head').append(`<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">`);
+    
+    // Initialize the icon replacer to use Iconoir icons throughout the app
+    initIconReplacer();
 
     // GET query params provided
     window.url_query_params = new URLSearchParams(window.location.search);

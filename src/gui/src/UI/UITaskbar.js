@@ -43,12 +43,54 @@ async function UITaskbar(options){
 
     let h = '';
     h += `<div id="ui-taskbar_${window.global_element_id}" class="taskbar" style="height:${window.taskbar_height}px;">`;
-        h += `<div class="taskbar-sortable" style="display: flex; justify-content: center; z-index: 99999;"></div>`;
-        // Add theme toggle container to the taskbar
+        // Left section
+        h += `<div class="taskbar-left-items">`;
+            h += `<div class="taskbar-icon" id="toggleSidebar">`;
+                h += `<i class="iconoir-menu"></i>`;
+            h += `</div>`;
+            
+            // App name/title
+            h += `<div class="taskbar-app-title">Puter</div>`;
+            h += `<div class="taskbar-icon" id="calendarBtn">`;
+                h += `<i class="iconoir-calendar"></i>`;
+            h += `</div>`;
+            h += `<div class="dropdown" id="mailDropdown">`;
+                h += `<div class="taskbar-icon" id="mailBtn">`;
+                    h += `<i class="iconoir-mail"></i>`;
+                    h += `<span class="notification-badge">3</span>`;
+                h += `</div>`;
+            h += `</div>`;
+            h += `<div class="taskbar-icon" id="searchBtn">`;
+                h += `<i class="iconoir-search"></i>`;
+            h += `</div>`;
+        h += `</div>`;
+        
+        // Center section with sortable taskbar items
+        h += `<div class="taskbar-center-items">`;
+            h += `<div class="taskbar-sortable" style="display: flex; justify-content: center; z-index: 99999;"></div>`;
+        h += `</div>`;
+        
+        // Right section with theme toggle and system icons
         h += `<div class="taskbar-right-items">`;
-            h += `<div class="theme-toggle">`;
-                h += `<i class="iconoir-half-moon theme-toggle-icon"></i>`;
-                h += `<span class="theme-toggle-text">Dark Mode</span>`;
+            h += `<div class="dropdown" id="wifiDropdown">`;
+                h += `<div class="taskbar-icon" id="wifiBtn">`;
+                    h += `<i class="iconoir-wifi"></i>`;
+                h += `</div>`;
+            h += `</div>`;
+            h += `<div class="dropdown" id="batteryDropdown">`;
+                h += `<div class="taskbar-icon" id="batteryBtn">`;
+                    h += `<i class="iconoir-battery-75"></i>`;
+                h += `</div>`;
+            h += `</div>`;
+            h += `<div class="dropdown" id="themeDropdown">`;
+                h += `<div class="taskbar-icon" id="themeToggleBtn">`;
+                    h += `<i class="iconoir-half-moon theme-toggle-icon"></i>`;
+                h += `</div>`;
+            h += `</div>`;
+            h += `<div class="dropdown" id="menuDropdown">`;
+                h += `<div class="taskbar-icon" id="menuBtn">`;
+                    h += `<i class="iconoir-more-vert"></i>`;
+                h += `</div>`;
             h += `</div>`;
         h += `</div>`;
     h += `</div>`;
@@ -56,31 +98,203 @@ async function UITaskbar(options){
 
     $('.desktop').append(h);
     
+    // Add dropdown menus HTML
+    // Mail dropdown
+    const mailDropdownHTML = `
+        <div class="dropdown-content">
+            <div class="dropdown-header">Messages</div>
+            <div class="dropdown-item">
+                <i class="iconoir-user-circle"></i>
+                <div>
+                    <div class="mail-subject">Project Update</div>
+                    <div class="mail-summary">The latest designs are ready for review...</div>
+                    <div class="mail-time">10:15 AM</div>
+                </div>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-user-circle"></i>
+                <div>
+                    <div class="mail-subject">Team Meeting</div>
+                    <div class="mail-summary">Reminder: We have a team meeting at 2 PM...</div>
+                    <div class="mail-time">9:30 AM</div>
+                </div>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-user-circle"></i>
+                <div>
+                    <div class="mail-subject">Weekly Report</div>
+                    <div class="mail-summary">Please submit your weekly report by Friday...</div>
+                    <div class="mail-time">Yesterday</div>
+                </div>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-inbox"></i>
+                <span>View All Messages</span>
+            </div>
+        </div>
+    `;
+    $('#mailDropdown').append(mailDropdownHTML);
+    
+    // WiFi dropdown
+    const wifiDropdownHTML = `
+        <div class="dropdown-content">
+            <div class="dropdown-item">
+                <i class="iconoir-wifi"></i>
+                <span>Wi-Fi Networks</span>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-internet"></i>
+                <span>Ethernet</span>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-settings"></i>
+                <span>Network Settings</span>
+            </div>
+        </div>
+    `;
+    $('#wifiDropdown').append(wifiDropdownHTML);
+    
+    // Battery dropdown
+    const batteryDropdownHTML = `
+        <div class="dropdown-content">
+            <div class="dropdown-item">
+                <i class="iconoir-battery-75"></i>
+                <span>75% Battery</span>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-flash"></i>
+                <span>Power Settings</span>
+            </div>
+        </div>
+    `;
+    $('#batteryDropdown').append(batteryDropdownHTML);
+    
+    // Theme dropdown
+    const themeDropdownHTML = `
+        <div class="dropdown-content">
+            <div class="dropdown-header">Appearance</div>
+            <div class="dropdown-item theme-option" data-theme="light">
+                <i class="iconoir-sun-light"></i>
+                <span>Light Mode</span>
+            </div>
+            <div class="dropdown-item theme-option" data-theme="dark">
+                <i class="iconoir-half-moon"></i>
+                <span>Dark Mode</span>
+            </div>
+            <div class="dropdown-item theme-option" data-theme="auto">
+                <i class="iconoir-device-desktop"></i>
+                <span>System Default</span>
+            </div>
+        </div>
+    `;
+    $('#themeDropdown').append(themeDropdownHTML);
+    
+    // Menu dropdown
+    const menuDropdownHTML = `
+        <div class="dropdown-content">
+            <div class="dropdown-item">
+                <i class="iconoir-user"></i>
+                <span>My Account</span>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-settings"></i>
+                <span>System Settings</span>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-help-circle"></i>
+                <span>Help & Support</span>
+            </div>
+            <div class="dropdown-item">
+                <i class="iconoir-log-out"></i>
+                <span>Sign Out</span>
+            </div>
+        </div>
+    `;
+    $('#menuDropdown').append(menuDropdownHTML);
+    
     // Initialize theme toggle
     const themeService = globalThis.services.get('theme');
-    const themeToggle = $('.theme-toggle');
-    const icon = themeToggle.find('.theme-toggle-icon');
-    const label = themeToggle.find('.theme-toggle-text');
+    const themeToggleBtn = $('#themeToggleBtn');
+    const icon = themeToggleBtn.find('.theme-toggle-icon');
     
     // Set initial state based on current theme
     if (document.body.classList.contains('light-theme')) {
         icon.removeClass('iconoir-half-moon').addClass('iconoir-sun-light');
-        label.text('Light Mode');
     }
     
-    // Add click event to theme toggle
-    themeToggle.on('click', function() {
-        const isCurrentlyLight = document.body.classList.contains('light-theme');
-        themeService.toggleTheme(!isCurrentlyLight);
+    // Add click event to theme options
+    $('.theme-option').on('click', function() {
+        const selectedTheme = $(this).data('theme');
         
-        if (!isCurrentlyLight) {
-            icon.removeClass('iconoir-half-moon').addClass('iconoir-sun-light');
-            label.text('Light Mode');
-        } else {
-            icon.removeClass('iconoir-sun-light').addClass('iconoir-half-moon');
-            label.text('Dark Mode');
+        // Update the icon in the taskbar
+        if (selectedTheme === 'light') {
+            icon.removeClass('iconoir-half-moon iconoir-device-desktop').addClass('iconoir-sun-light');
+            themeService.setTheme('light');
+        } else if (selectedTheme === 'dark') {
+            icon.removeClass('iconoir-sun-light iconoir-device-desktop').addClass('iconoir-half-moon');
+            themeService.setTheme('dark');
+        } else if (selectedTheme === 'auto') {
+            icon.removeClass('iconoir-sun-light iconoir-half-moon').addClass('iconoir-device-desktop');
+            // Use system preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            themeService.setTheme(prefersDark ? 'dark' : 'light');
+            
+            // Add listener for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                themeService.setTheme(e.matches ? 'dark' : 'light');
+            });
+        }
+        
+        // Close the dropdown
+        $('#themeDropdown').removeClass('active');
+    });
+    
+    // Initialize dropdown functionality
+    $('.dropdown').each(function() {
+        const dropdown = $(this);
+        const trigger = dropdown.find('.taskbar-icon');
+        
+        trigger.on('click', function(e) {
+            e.stopPropagation();
+            
+            // Close all other dropdowns
+            $('.dropdown').not(dropdown).removeClass('active');
+            
+            // Toggle current dropdown
+            dropdown.toggleClass('active');
+        });
+    });
+    
+    // Close dropdowns when clicking outside
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.dropdown').length) {
+            $('.dropdown').removeClass('active');
         }
     });
+    
+    // Add time display to the center if needed
+    const updateTime = function() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const dateStr = now.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+        
+        if ($('#time-display').length === 0) {
+            const timeHtml = `
+                <div class="time-display" id="time-display">
+                    <span id="time">${timeStr}</span>
+                    <span class="date-display" id="date">${dateStr}</span>
+                </div>
+            `;
+            $('.taskbar-center-items').append(timeHtml);
+        } else {
+            $('#time').text(timeStr);
+            $('#date').text(dateStr);
+        }
+    };
+    
+    // Update time immediately and then every minute
+    updateTime();
+    setInterval(updateTime, 60000);
 
 
     //---------------------------------------------

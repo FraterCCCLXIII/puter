@@ -24,71 +24,52 @@
   /* Font family */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   
-  /* Light theme */
-  --primary-bg-light: #f5f7fa;
-  --secondary-bg-light: #ffffff;
-  --surface-bg-light: #f0f2f5;
-  --text-primary-light: #1a1a1a;
-  --text-secondary-light: rgba(0, 0, 0, 0.7);
-  --accent-color-light: #0071e3;
-  --hover-bg-light: rgba(0, 0, 0, 0.05);
-  --active-bg-light: rgba(0, 0, 0, 0.1);
-  --border-color-light: rgba(0, 0, 0, 0.1);
-  --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.08);
-  --card-bg-light: #ffffff;
-
-  /* Dark theme */
-  --primary-bg-dark: #1a1a1a;
-  --secondary-bg-dark: #2c2c2c;
-  --surface-bg-dark: #333333;
-  --text-primary-dark: #ffffff;
-  --text-secondary-dark: rgba(255, 255, 255, 0.7);
-  --accent-color-dark: #0a84ff;
-  --hover-bg-dark: rgba(255, 255, 255, 0.1);
-  --active-bg-dark: rgba(255, 255, 255, 0.15);
-  --border-color-dark: rgba(255, 255, 255, 0.1);
-  --shadow-dark: 0 2px 10px rgba(0, 0, 0, 0.3);
-  --card-bg-dark: #2c2c2c;
-
-  /* Current theme defaults (dark) */
-  --primary-bg: var(--primary-bg-dark);
-  --secondary-bg: var(--secondary-bg-dark);
-  --surface-bg: var(--surface-bg-dark);
-  --text-primary: var(--text-primary-dark);
-  --text-secondary: var(--text-secondary-dark);
-  --accent-color: var(--accent-color-dark);
-  --hover-bg: var(--hover-bg-dark);
-  --active-bg: var(--active-bg-dark);
-  --border-color: var(--border-color-dark);
-  --shadow: var(--shadow-dark);
-  --card-bg: var(--card-bg-dark);
+  /* Dark theme (Default) */
+  --primary-bg: #121212;
+  --secondary-bg: #1e1e1e;
+  --surface-bg: #252525;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --accent-color: #4dabf7;
+  --hover-bg: rgba(255, 255, 255, 0.1);
+  --active-bg: rgba(255, 255, 255, 0.2);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+  --card-bg: #252525;
   
   /* Common variables */
   --border-radius-sm: 6px;
   --border-radius-md: 10px;
   --border-radius-lg: 14px;
+  --border-radius-xl: 20px;
+  --border-radius-pill: 20px;
+  --border-radius-circle: 50%;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s ease;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
 }
 
 /* Light theme class */
 body.light-theme {
-  --primary-bg: var(--primary-bg-light);
-  --secondary-bg: var(--secondary-bg-light);
-  --surface-bg: var(--surface-bg-light);
-  --text-primary: var(--text-primary-light);
-  --text-secondary: var(--text-secondary-light);
-  --accent-color: var(--accent-color-light);
-  --hover-bg: var(--hover-bg-light);
-  --active-bg: var(--active-bg-light);
-  --border-color: var(--border-color-light);
-  --shadow: var(--shadow-light);
-  --card-bg: var(--card-bg-light);
+  --primary-bg: #f5f5f5;
+  --secondary-bg: #ffffff;
+  --surface-bg: #f0f0f0;
+  --text-primary: #333333;
+  --text-secondary: rgba(0, 0, 0, 0.7);
+  --accent-color: #1971c2;
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  --active-bg: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.3);
+  --card-bg: #ffffff;
 }
 
 /* ===================== */
@@ -101,11 +82,37 @@ body {
   transition: background-color var(--transition-normal), color var(--transition-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Apply Inter font to all text elements */
 h1, h2, h3, h4, h5, h6, p, span, div, button, input, select, textarea, a {
   font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* ===================== */
@@ -282,24 +289,135 @@ textarea:focus {
 }
 
 /* ======================= */
-/* TASKBAR OVERRIDES */
+/* SYSTEM BAR / TASKBAR OVERRIDES */
 /* ======================= */
 .taskbar {
   background-color: var(--secondary-bg) !important;
-  border-top: 1px solid var(--border-color) !important;
+  border-top: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
   transition: background-color var(--transition-normal), border-color var(--transition-normal);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 var(--spacing-md);
+  height: 60px !important;
+  z-index: 1000;
+  position: relative;
 }
 
+.taskbar-left-items,
+.taskbar-center-items,
 .taskbar-right-items {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin-right: var(--spacing-md);
   height: 100%;
+}
+
+.taskbar-center-items {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.taskbar-right-items {
+  margin-left: auto;
+}
+
+.taskbar-icon {
+  font-size: 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 10px;
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taskbar-icon:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #ff3b30;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===================== */
+/* DOCK STYLES */
+/* ===================== */
+.dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--surface-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--border-radius-xl);
+  padding: 12px 20px;
+  display: flex;
+  gap: 16px;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  border: 1px solid var(--border-color);
+}
+
+.dock-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  color: var(--text-primary);
+}
+
+.dock-icon:hover {
+  background-color: var(--hover-bg);
+  transform: translateY(-6px) scale(1.1);
+}
+
+.dock-icon.active {
+  background-color: var(--active-bg);
+}
+
+.dock-icon i {
+  font-size: 26px;
+}
+
+.dock-icon::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.dock-icon.active::after {
+  opacity: 1;
 }
 
 /* ===================== */
@@ -312,12 +430,11 @@ textarea:focus {
   gap: var(--spacing-sm);
   padding: var(--spacing-xs) var(--spacing-md);
   background-color: var(--hover-bg);
-  border-radius: 20px;
+  border-radius: var(--border-radius-pill);
   cursor: pointer;
   transition: all var(--transition-fast);
   border: 1px solid var(--border-color);
-  height: 28px;
-  margin-right: var(--spacing-md);
+  height: 36px;
 }
 
 .theme-toggle:hover {
@@ -325,15 +442,72 @@ textarea:focus {
 }
 
 .theme-toggle-icon {
-  font-size: 16px;
+  font-size: 18px;
   color: var(--text-primary);
 }
 
 .theme-toggle-text {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-primary);
   white-space: nowrap;
+}
+
+/* ===================== */
+/* DROPDOWN MENUS */
+/* ===================== */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--surface-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-sm) 0;
+  box-shadow: var(--shadow);
+  min-width: 250px;
+  z-index: 1001;
+  display: none;
+  margin-top: 8px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  padding: var(--spacing-md) var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  color: var(--text-primary);
+}
+
+.dropdown-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.dropdown-item i {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.dropdown-header {
+  padding: var(--spacing-md) var(--spacing-md);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 /* ===================== */
@@ -349,12 +523,60 @@ textarea:focus {
   to { transform: translateY(0); opacity: 1; }
 }
 
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 .animate-fade {
   animation: fadeIn 0.3s ease forwards;
 }
 
 .animate-slide {
   animation: slideUp 0.3s ease forwards;
+}
+
+.animate-scale {
+  animation: scaleIn 0.2s ease forwards;
+}
+
+/* ===================== */
+/* MAIL DROPDOWN STYLES */
+/* ===================== */
+.mail-subject {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mail-summary {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mail-time {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* ===================== */
+/* TIME DISPLAY */
+/* ===================== */
+.time-display {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.date-display {
+  color: var(--text-secondary);
 }
 
 /* ===================== */
@@ -375,5 +597,39 @@ textarea:focus {
   
   .theme-toggle-text {
     display: none;
+  }
+  
+  .taskbar {
+    padding: var(--spacing-sm) var(--spacing-md);
+    height: 56px !important;
+  }
+  
+  .taskbar-icon {
+    font-size: 18px;
+    padding: 8px;
+  }
+  
+  .dock {
+    bottom: 12px;
+    padding: 10px 12px;
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .dock-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .dock-icon i {
+    font-size: 20px;
+  }
+  
+  .dropdown-content {
+    width: 100vw;
+    left: 0;
+    right: 0;
+    transform: none;
+    border-radius: 0;
+    max-height: 60vh;
   }
 }

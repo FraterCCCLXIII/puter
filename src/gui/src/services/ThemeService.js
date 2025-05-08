@@ -146,6 +146,29 @@ export class ThemeService extends Service {
         
         this.save_();
     }
+    
+    /**
+     * Set the theme directly
+     * @param {string} theme - The theme to set ('light' or 'dark')
+     */
+    setTheme(theme) {
+        if (theme === 'light') {
+            document.body.classList.add('light-theme');
+            this.state.theme_mode = 'light';
+            localStorage.setItem('theme', 'light');
+        } else if (theme === 'dark') {
+            document.body.classList.remove('light-theme');
+            this.state.theme_mode = 'dark';
+            localStorage.setItem('theme', 'dark');
+        }
+        
+        // Broadcast theme change
+        this.#broadcastService.sendBroadcast('themeToggled', {
+            isLight: theme === 'light'
+        }, { sendToNewAppInstances: true });
+        
+        this.save_();
+    }
 
     reload_() {
         const s = this.state;
