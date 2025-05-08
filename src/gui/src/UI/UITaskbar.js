@@ -44,10 +44,43 @@ async function UITaskbar(options){
     let h = '';
     h += `<div id="ui-taskbar_${window.global_element_id}" class="taskbar" style="height:${window.taskbar_height}px;">`;
         h += `<div class="taskbar-sortable" style="display: flex; justify-content: center; z-index: 99999;"></div>`;
+        // Add theme toggle container to the taskbar
+        h += `<div class="taskbar-right-items">`;
+            h += `<div class="theme-toggle">`;
+                h += `<i class="iconoir-half-moon theme-toggle-icon"></i>`;
+                h += `<span class="theme-toggle-text">Dark Mode</span>`;
+            h += `</div>`;
+        h += `</div>`;
     h += `</div>`;
 
 
     $('.desktop').append(h);
+    
+    // Initialize theme toggle
+    const themeService = globalThis.services.get('theme');
+    const themeToggle = $('.theme-toggle');
+    const icon = themeToggle.find('.theme-toggle-icon');
+    const label = themeToggle.find('.theme-toggle-text');
+    
+    // Set initial state based on current theme
+    if (document.body.classList.contains('light-theme')) {
+        icon.removeClass('iconoir-half-moon').addClass('iconoir-sun-light');
+        label.text('Light Mode');
+    }
+    
+    // Add click event to theme toggle
+    themeToggle.on('click', function() {
+        const isCurrentlyLight = document.body.classList.contains('light-theme');
+        themeService.toggleTheme(!isCurrentlyLight);
+        
+        if (!isCurrentlyLight) {
+            icon.removeClass('iconoir-half-moon').addClass('iconoir-sun-light');
+            label.text('Light Mode');
+        } else {
+            icon.removeClass('iconoir-sun-light').addClass('iconoir-half-moon');
+            label.text('Dark Mode');
+        }
+    });
 
 
     //---------------------------------------------

@@ -49,6 +49,7 @@ import { IPCService } from './services/IPCService.js';
 import { ExecService } from './services/ExecService.js';
 import { DebugService } from './services/DebugService.js';
 import { privacy_aware_path } from './util/desktop.js';
+import { initIconReplacer } from './utils/icon-replacer.js';
 
 const launch_services = async function (options) {
     // === Services Data Structures ===

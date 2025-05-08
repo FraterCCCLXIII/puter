@@ -171,51 +171,31 @@ console.log( "%c⚠️Warning⚠️\n%cPlease refrain from adding or pasting any
 );
 
 
-// Added by Paul
-// Theme toggle functionality
-const themeToggle = document.createElement('div');
-themeToggle.id = 'themeToggle';
-themeToggle.className = 'theme-toggle';
-themeToggle.innerHTML = `
-  <i class="fas fa-moon"></i>
-  <span>Dark Mode</span>
-`;
+// Load Inter font
+const interFontLink = document.createElement('link');
+interFontLink.rel = 'stylesheet';
+interFontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
+document.head.appendChild(interFontLink);
 
-const themeToggleContainer = document.createElement('div');
-themeToggleContainer.className = 'theme-toggle-container';
-themeToggleContainer.appendChild(themeToggle);
-document.body.appendChild(themeToggleContainer);
+// Load modern theme CSS
+const modernThemeLink = document.createElement('link');
+modernThemeLink.rel = 'stylesheet';
+modernThemeLink.href = '/css/modern-theme.css';
+document.head.appendChild(modernThemeLink);
 
-// Load Font Awesome for the theme toggle icon
-const faLink = document.createElement('link');
-faLink.rel = 'stylesheet';
-faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-document.head.appendChild(faLink);
+// Load Iconoir CSS
+const iconoirLink = document.createElement('link');
+iconoirLink.rel = 'stylesheet';
+iconoirLink.href = 'https://cdn.jsdelivr.net/npm/iconoir@6.11.0/css/iconoir.min.css';
+document.head.appendChild(iconoirLink);
 
-const body = document.body;
-const icon = themeToggle.querySelector('i');
-const label = themeToggle.querySelector('span');
-
-// Check for saved theme preference or use preferred color scheme
-const savedTheme = localStorage.getItem('theme');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
-  body.classList.add('light-theme');
-  icon.classList.replace('fa-moon', 'fa-sun');
-  label.textContent = 'Light Mode';
-}
-
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('light-theme');
-
-  if (body.classList.contains('light-theme')) {
-    icon.classList.replace('fa-moon', 'fa-sun');
-    label.textContent = 'Light Mode';
-    localStorage.setItem('theme', 'light');
-  } else {
-    icon.classList.replace('fa-sun', 'fa-moon');
-    label.textContent = 'Dark Mode';
-    localStorage.setItem('theme', 'dark');
+// Import and initialize icon replacer when DOM is loaded
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const { initIconReplacer } = await import('./utils/icon-replacer.js');
+    initIconReplacer();
+    console.log('Iconoir icons initialized');
+  } catch (error) {
+    console.error('Failed to initialize Iconoir icons:', error);
   }
 });

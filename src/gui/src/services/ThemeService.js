@@ -30,6 +30,7 @@ const default_values = {
     lig: 93.33,
     alpha: 0.8,
     light_text: false,
+    theme_mode: 'dark', // 'dark' or 'light'
 };
 
 export class ThemeService extends Service {
@@ -44,12 +45,20 @@ export class ThemeService extends Service {
             lig: 93.33,
             alpha: 0.8,
             light_text: false,
+            theme_mode: 'dark',
         };
         this.root = document.querySelector(':root');
-        // this.ss = new CSSStyleSheet();
-        // document.adoptedStyleSheets.push(this.ss);
-
+        
         this.save_cooldown_ = undefined;
+
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+            this.state.theme_mode = 'light';
+            document.body.classList.add('light-theme');
+        }
 
         let data = undefined;
         try {
@@ -88,6 +97,14 @@ export class ThemeService extends Service {
             };
             this.reload_();
         }
+        
+        // Listen for system color scheme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            // Only change theme if user hasn't explicitly set a preference
+            if (!localStorage.getItem('theme')) {
+                this.toggleTheme(!e.matches);
+            }
+        });
     }
 
     reset () {
@@ -106,16 +123,32 @@ export class ThemeService extends Service {
     }
 
     get (key) { return this.state[key]; }
+    
+    /**
+     * Toggle between light and dark theme
+     * @param {boolean} isLight - Whether to set light theme (true) or dark theme (false)
+     */
+    toggleTheme(isLight) {
+        if (isLight) {
+            document.body.classList.add('light-theme');
+            this.state.theme_mode = 'light';
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.body.classList.remove('light-theme');
+            this.state.theme_mode = 'dark';
+            localStorage.setItem('theme', 'dark');
+        }
+        
+        // Broadcast theme change
+        this.#broadcastService.sendBroadcast('themeToggled', {
+            isLight: isLight
+        }, { sendToNewAppInstances: true });
+        
+        this.save_();
+    }
 
     reload_() {
-        // debugger;
         const s = this.state;
-        // this.ss.replace(`
-        //     .taskbar, .window-head, .window-sidebar {
-        //         background-color: hsla(${s.hue}, ${s.sat}%, ${s.lig}%, ${s.alpha});
-        //     }
-        // `)
-        // this.root.style.setProperty('--puter-window-background', `hsla(${s.hue}, ${s.sat}%, ${s.lig}%, ${s.alpha})`);
         this.root.style.setProperty('--primary-hue', s.hue);
         this.root.style.setProperty('--primary-saturation', s.sat + '%');
         this.root.style.setProperty('--primary-lightness', s.lig + '%');
@@ -124,7 +157,7 @@ export class ThemeService extends Service {
         this.root.style.setProperty('--primary-color-icon', s.light_text ? 'invert(1)' : 'invert(0)');
         this.root.style.setProperty('--primary-color-sidebar-item', s.light_text ? '#5a5d61aa' : '#fefeff');
 
-        // TODO: Should we debounce this to reduce traffic?
+        // Broadcast theme change
         this.#broadcastService.sendBroadcast('themeChanged', {
             palette: {
                 primaryHue: s.hue,
@@ -132,6 +165,7 @@ export class ThemeService extends Service {
                 primaryLightness: s.lig + '%',
                 primaryAlpha: s.alpha,
                 primaryColor: s.light_text ? 'white' : '#373e44',
+                themeMode: s.theme_mode,
             },
         }, { sendToNewAppInstances: true });
     }   
@@ -144,6 +178,7 @@ export class ThemeService extends Service {
             this.commit_save_();
         }, SAVE_COOLDOWN_TIME);
     }
+    
     commit_save_ () {
         puter.fs.write(PUTER_THEME_DATA_FILENAME, JSON.stringify(
             { colors: this.state },
